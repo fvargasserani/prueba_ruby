@@ -28,6 +28,7 @@ def build_web_page(body)
     
     body.map {|photo| html += "\t""<li><img src=\"#{photo["img_src"]}\"></li>""\n"}    
     
+    html +=
     "</ul>\n
     </body>\n
     </html>"
