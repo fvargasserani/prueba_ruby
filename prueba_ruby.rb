@@ -18,20 +18,19 @@ body = body["photos"][0..25]
 
 def build_web_page(body)
     html = 
-    "<html>"
-    "<title> Fotos de la API de la NASA </title>""\n"
-    "<head>""\n"
-    "</head>""\n"
-    "<body>""\n"
-    "<h1> Bienvenid@, conoce fotos tomadas por la NASA en el espacio <h1>""\n"
-    "<ul>""\n"
+    "<html>\n
+    <title>Fotos de la API de la NASA</title>\n
+    <head>\n
+    </head>\n
+    <body>\n
+    <h1>Bienvenid@, conoce fotos tomadas por la NASA en el espacio<h1>\n
+    <ul>\n"
     
-    body.map {|photo| html += "\t""<li><img src=#{["img_src"]}></li>""\n"}    
+    body.map {|photo| html += "\t""<li><img src=\#{photo["img_src"]}\"></li>""\n"}    
     
-    html +=
-    "</ul>""\n"
-    "</body>""\n"
-    "</html>"
+    "</ul>\n
+    </body>\n
+    </html>"
 
     File.write('NASA_photos.html', html)
 end
