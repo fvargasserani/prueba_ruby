@@ -16,7 +16,7 @@ end
 def build_web_page(body)
     photos = body["photos"]
     
-    top = 
+    html =
     "<html>\n
     <title>Fotos de la NASA</title>\n
     <head>\n
@@ -25,17 +25,35 @@ def build_web_page(body)
     <h1>Bienvenid@, conoce fotos tomadas por la NASA en el espacio<h1>\n
     <ul>\n"
     
-    photos.map {|x| top += "\t""<li><img src=#{x["img_src"]} width='200px'></li>""\n"}    
+    photos.map {|x| html += "\t<li><img src=#{x["img_src"]} width='200px'></li>\n"}    
     
-    final =
+    html +=
     "</ul>\n
     </body>\n
     </html>"
-
-    html = top + final
     
     File.write('NASA_photos.html', html)
 end
 
+def photos_count(body)
+    photos_array = body["photos"]
+    new_array = []
+    final_array = []
+    n = photos_array.count
+    n.times do |i|
+        photos_array[i].each {|k,v| new_array << v if k == 'camera' }
+    end
+    n1 = new_array.count
+    n1.times do |i|
+        new_array[i].each {|k,v| final_array << v if k == 'name'}
+    end
+    final_hash = final_array.group_by {|x| x}
+    final_hash.each do |k,v|
+        final_hash[k] = v.count
+    end
+    final_hash
+end
+
 body = request("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000", "&api_key=0IKxbe4GcwTwCfJsbKzegTyslzF6NhVE1gHkgRgy&page=1")
 build_web_page(body)
+print photos_count(body)
