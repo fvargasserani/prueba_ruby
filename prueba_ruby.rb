@@ -26,7 +26,7 @@ def build_web_page(body)
     "<h1> Bienvenid@, conoce fotos tomadas por la NASA en el espacio <h1>""\n"
     "<ul>""\n"
     
-    body.map {|photo| html += "\t""<li><img src=" + photo["img_src"] + "style='width:200px'></li>""\n"}    
+    body.map {|photo| html += "\t""<li><img src=#{["img_src"]}></li>""\n"}    
     
     html +=
     "</ul>""\n"
