@@ -37,20 +37,17 @@ end
 
 def photos_count(body)
     photos_array = body["photos"]
-    new_array = []
     final_array = []
-    n = photos_array.count
-    n.times do |i|
-        photos_array[i].each {|k,v| new_array << v if k == 'camera' }
+
+    photos_array.each do |i|
+        final_array << i['camera']['name']
     end
-    n1 = new_array.count
-    n1.times do |i|
-        new_array[i].each {|k,v| final_array << v if k == 'name'}
-    end
+
     final_hash = final_array.group_by {|x| x}
     final_hash.each do |k,v|
         final_hash[k] = v.count
     end
+
     final_hash
 end
 
