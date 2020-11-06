@@ -14,7 +14,7 @@ def request(address, api_key)
 end
 
 body = request("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000", "&api_key=0IKxbe4GcwTwCfJsbKzegTyslzF6NhVE1gHkgRgy&page=1")
-body = body["photos"][0..25]  
+body = body["photos"][0..25]
 
 def build_web_page(body)
     html = 
@@ -26,8 +26,9 @@ def build_web_page(body)
     "<h1> Bienvenid@, conoce fotos tomadas por la NASA en el espacio <h1>""\n"
     "<ul>""\n"
     
-    body.map {|photo| html += "\t""<li><img src=" + photo["img_src"] + "></li>""\n"}    
+    body.map {|photo| html += "\t""<li><img src=" + photo["img_src"] + "style='width:200px'></li>""\n"}    
     
+    html +=
     "</ul>""\n"
     "</body>""\n"
     "</html>"
@@ -35,13 +36,4 @@ def build_web_page(body)
     File.write('NASA_photos.html', html)
 end
 
-photos = body['photos'][0..20]
-
-def photos_count(photos)
-    photos.each do |x|
-        puts x["name"]["id".reverse.size]
-    end
-end
-
 build_web_page(body)
-puts photos_count(photos)
