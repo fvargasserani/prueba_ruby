@@ -28,7 +28,7 @@ def build_web_page(body)
     photos.map {|x| html += "\t<li><img src=#{x["img_src"]} width='200px'></li>\n"}    
     
     html +=
-    "\t</ul>\n
+    "</ul>\n
     </body>\n
     </html>"
     
